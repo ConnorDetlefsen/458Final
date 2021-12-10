@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Header from "../Components/header";
-import Product from "../Components/product";
 import Layout from "../Components/layout";
 import Link from "next/link";
-import productContainer from "../Components/productContainer";
 import { Auth } from "@supabase/ui";
 import { useState } from "react";
 
