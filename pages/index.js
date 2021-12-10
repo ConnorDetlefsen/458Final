@@ -5,7 +5,6 @@ import Layout from "../Components/layout";
 import Link from "next/link";
 import productContainer from "../Components/productContainer";
 import { Auth } from "@supabase/ui";
-
 import { useState } from "react";
 
 const ROUTE_PRODUCT_ID = "/products/[id]";
@@ -14,7 +13,15 @@ export default function Home(allProductData) {
   const [products, setProducts] = useState([
     { id: 1, name: "tire", price: 110 },
     { id: 2, name: "wheels", price: 250 },
+    { id: 3, name: "Car", price: 1000 },
+    { id: 4, name: "Tools", price: 10 },
+    { id: 5, name: "Mod", price: 400 },
+    { id: 6, name: "Car", price: 1000 },
+    { id: 7, name: "Wheel", price: 10 },
+    { id: 8, name: "Motorcycle Wheel", price: 400 },
+    { id: 9, name: "5mm Round Cut Tennis Bracelet in White Gold", price: 1000 },
   ]);
+  const { user } = Auth.useUser();
 
   return (
     <Layout home>
@@ -29,22 +36,36 @@ export default function Home(allProductData) {
         <title>Hello, world!</title>
       </head>
       <section>
-        {products.map((product) => (
-          <div key={`product-${product.id}`} className="bg-pink-100 p-6 ">
-            <Link
-              href={{
-                pathname: ROUTE_PRODUCT_ID,
-                query: {
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                },
-              }}
+        <h1 className="p-12 text-7xl text-center border-b-2 border-gray-300">
+          PRODUCTS
+        </h1>
+
+        <div className="flex-row flex justify-center p-8 flex-wrap">
+          {products.map((product) => (
+            <div
+              key={`product-${product.id}`}
+              className=" shadow-md rounded-lg m-4 p-3 w-1/4 flex flex-col border-2  border-gray-300"
             >
-              <a>{product.name}</a>
-            </Link>
-          </div>
-        ))}
+              <Link
+                href={{
+                  pathname: ROUTE_PRODUCT_ID,
+                  query: {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                  },
+                }}
+              >
+                <a className="text-4xl text-black py-2">{product.name}</a>
+              </Link>
+              <p>${product.price}</p>
+
+              <button className="bg-black text-white w-1/3 p-2 rounded-lg hover:bg-gray-600">
+                Add to cart
+              </button>
+            </div>
+          ))}
+        </div>
       </section>
     </Layout>
   );

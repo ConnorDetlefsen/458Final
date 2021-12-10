@@ -25,12 +25,16 @@ import { useRouter } from "next/router";
 export default function PostPage() {
   const router = useRouter();
   return (
-    <div className="bg-yellow-200">
+    <div className="">
       <Header />
       <br />
-      <h1>Product ID: {router.query.id}</h1>
-      <h1>Product name: {router.query.name}</h1>
-      <h1>Product price: {router.query.price}</h1>
+      <h1 className="p-12 text-7xl text-center border-b-2 border-gray-300">
+        {router.query.name}
+      </h1>
+      <div className=" p-12 h-full w-full flex flex-col items-center text-4xl">
+        <h1>{router.query.name}</h1>
+        <h1>${router.query.price}</h1>
+      </div>
       <br />
     </div>
   );
