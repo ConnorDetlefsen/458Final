@@ -1,26 +1,45 @@
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Header from "../Components/header";
 import Layout from "../Components/layout";
 import Link from "next/link";
 import { Auth } from "@supabase/ui";
 import { useState } from "react";
+import { supabase } from "../utils/supabaseClient";
 
 const ROUTE_PRODUCT_ID = "/products/[id]";
 
 export default function Home(allProductData) {
-  const [products, setProducts] = useState([
-    { id: 1, name: "tire", price: 110 },
-    { id: 2, name: "wheels", price: 250 },
-    { id: 3, name: "Car", price: 1000 },
-    { id: 4, name: "Tools", price: 10 },
-    { id: 5, name: "Mod", price: 400 },
-    { id: 6, name: "Car", price: 1000 },
-    { id: 7, name: "Wheel", price: 10 },
-    { id: 8, name: "Motorcycle Wheel", price: 400 },
-    { id: 9, name: "5mm Round Cut Tennis Bracelet in White Gold", price: 1000 },
-  ]);
+  const [products, setProducts] = useState([]);
   const { user } = Auth.useUser();
 
+  useEffect(() => {
+    //run the fetchGratitudes() function
+    //after the initial render of the app
+    // so we have access to the logged in user
+    fetchListings();
+  }, []);
+
+  const fetchListings = async () => {
+    //get the gratitudes data from supabase
+    //set the value of gratitudes state to that data
+    let { data: listings, error } = await supabase.from("listings").select("*");
+    if (!error) {
+      /*check date*/
+      console.log(listings);
+
+      setProducts(listings);
+    } else {
+      //there was an error
+      console.log(error);
+    }
+    console.log();
+  };
+  /*
+  let { data, error } = await supabase.from("listings").select("*");
+  console.log(data);
+  console.log(error);
+  */
   return (
     <Layout home>
       <head>
@@ -34,7 +53,7 @@ export default function Home(allProductData) {
         <title>Hello, world!</title>
       </head>
       <section>
-        <h1 className="p-12 text-7xl text-center border-b-2 border-gray-300">
+        <h1 className="p-9 text-4xl text-center border-b-2 border-gray-300">
           PRODUCTS
         </h1>
 
@@ -42,20 +61,24 @@ export default function Home(allProductData) {
           {products.map((product) => (
             <div
               key={`product-${product.id}`}
-              className=" shadow-md rounded-lg m-4 p-3 w-1/4 flex flex-col border-2  border-gray-300"
+              className=" shadow-md rounded-lg m-4 p-3 w-1/5 flex flex-col border-2  border-gray-300"
             >
-              <Link
-                href={{
-                  pathname: ROUTE_PRODUCT_ID,
-                  query: {
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                  },
-                }}
-              >
-                <a className="text-4xl text-black py-2">{product.name}</a>
-              </Link>
+              <div className="flex flex-row justify-between flex-wrap">
+                <Link
+                  href={{
+                    pathname: ROUTE_PRODUCT_ID,
+                    query: {
+                      id: product.product_id,
+                      name: product.name,
+                      price: product.price,
+                      description: product.description,
+                    },
+                  }}
+                >
+                  <a className="text-2xl text-black py-2">{product.name}</a>
+                </Link>
+                <p className="py-2 text-lg">Favorite</p>
+              </div>
               <p>${product.price}</p>
 
               <button className="bg-black text-white w-1/3 p-2 rounded-lg hover:bg-gray-600">

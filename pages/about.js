@@ -17,12 +17,12 @@ export default function About() {
         <title>Hello, world!</title>
       </head>
       <section className="flex flex-col min-h-full flex-grow">
-        <h1 className="p-12 text-7xl text-center border-b-2 border-gray-300">
+        <h1 className="p-9 text-4xl text-center border-b-2 border-gray-300">
           ABOUT
         </h1>
         <div className="flex flex-row flex-wrap items-center h-full border-b-2 border-gray-300">
-          <h1 className="px-12 text-5xl">Buying</h1>
-          <p className="text-left w-4/5 p-12 text-xl">
+          <h1 className="px-9 text-3xl">Buying</h1>
+          <p className="text-left w-4/5 p-9 text-lg">
             We created PartOut to curate listings for individual items so that
             buyers can find used wheels at the lowest price possible. We’ve made
             the buying process simple by eliminating the hassle of communicating
@@ -31,8 +31,8 @@ export default function About() {
           </p>
         </div>
         <div className="flex flex-row flex-wrap h-full items-center border-b-2 border-gray-300	">
-          <h1 className="px-12 text-5xl">Selling</h1>
-          <p className="text-left w-4/5 p-12 text-xl">
+          <h1 className="px-9 text-3xl">Selling</h1>
+          <p className="text-left w-4/5 p-9 text-lg">
             PartOut aggregates buyers who are looking for the specific item you
             are selling. Just search for your item, submit your listing, and
             start selling. Once your item sells, ship your item using the
@@ -41,7 +41,7 @@ export default function About() {
           </p>
         </div>
         <div className="w-full flex flex-col items-center ">
-          <h1 className="text-center p-12 ">
+          <h1 className="text-center p-6 text-xl">
             Sign up to learn about news, updates, promotions, and more!
           </h1>
           <div className="flex flex-row">
@@ -59,6 +59,7 @@ export default function About() {
               </button>
             </form>
           </div>
+          <div className="p-2" />
         </div>
       </section>
     </Layout>
